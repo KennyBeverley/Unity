@@ -20,7 +20,7 @@ public class HeadTracking : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mech = GameObject.Find("Mech");
+        mech = GameObject.Find("Player");
     }
 
     // Update is called once per frame

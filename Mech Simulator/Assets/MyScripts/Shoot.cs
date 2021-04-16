@@ -164,83 +164,26 @@ public class Shoot : MonoBehaviour
 
     private void setElectric()
     {
-        foreach (Transform child in lightningScreen.transform)
-        {
-            if (child.gameObject.name == "Trim")
-            {
-                child.GetComponent<Renderer>().material = selectedMat;
-            }
-        }
-
-        foreach (Transform child in plasmaScreen.transform)
-        {
-            if (child.gameObject.name == "Trim")
-            {
-                child.GetComponent<Renderer>().material = normalMat;
-            }
-        }
-
-        foreach (Transform child in shieldScreen.transform)
-        {
-            if (child.gameObject.name == "Trim")
-            {
-                child.GetComponent<Renderer>().material = normalMat;
-            }
-        }
+        lightningScreen.GetComponent<Renderer>().material = selectedMat;
+        plasmaScreen.GetComponent<Renderer>().material = normalMat;
+        shieldScreen.GetComponent<Renderer>().material = normalMat;
+        
     }
 
     private void setPlasma()
     {
-        foreach (Transform child in lightningScreen.transform)
-        {
-            if (child.gameObject.name == "Trim")
-            {
-                child.GetComponent<Renderer>().material = normalMat;
-            }
-        }
-
-        foreach (Transform child in plasmaScreen.transform)
-        {
-            if (child.gameObject.name == "Trim")
-            {
-                child.GetComponent<Renderer>().material = selectedMat;
-            }
-        }
-
-        foreach (Transform child in shieldScreen.transform)
-        {
-            if (child.gameObject.name == "Trim")
-            {
-                child.GetComponent<Renderer>().material = normalMat;
-            }
-        }
+        lightningScreen.GetComponent<Renderer>().material = normalMat;
+        plasmaScreen.GetComponent<Renderer>().material = selectedMat;
+        shieldScreen.GetComponent<Renderer>().material = normalMat;
+        
     }
 
     private void setShield()
     {
-        foreach (Transform child in lightningScreen.transform)
-        {
-            if (child.gameObject.name == "Trim")
-            {
-                child.GetComponent<Renderer>().material = normalMat;
-            }
-        }
-
-        foreach (Transform child in plasmaScreen.transform)
-        {
-            if (child.gameObject.name == "Trim")
-            {
-                child.GetComponent<Renderer>().material = normalMat;
-            }
-        }
-
-        foreach (Transform child in shieldScreen.transform)
-        {
-            if (child.gameObject.name == "Trim")
-            {
-                child.GetComponent<Renderer>().material = selectedMat;
-            }
-        }
+        lightningScreen.GetComponent<Renderer>().material = normalMat;
+        plasmaScreen.GetComponent<Renderer>().material = normalMat;
+        shieldScreen.GetComponent<Renderer>().material = selectedMat;
+        
     }
 
     private void rechargeAmmo()

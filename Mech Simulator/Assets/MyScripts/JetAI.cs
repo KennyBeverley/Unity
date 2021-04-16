@@ -22,7 +22,7 @@ public class JetAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Mech");
+        player = GameObject.Find("Player");
         state = JetState.descend;
         anim = transform.GetChild(0).GetComponent<Animator>();
         nav = gameObject.GetComponentInParent<NavMeshAgent>();

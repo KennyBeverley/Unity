@@ -9,7 +9,7 @@ public class Rocket : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Mech");
+        player = GameObject.Find("Player");
         transform.GetChild(0).gameObject.SetActive(true);
     }
 

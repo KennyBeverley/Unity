@@ -24,7 +24,7 @@ public class Movement : MonoBehaviour
     {
         gm = GameObject.Find("GameManager");
         controlls = gm.GetComponent<VRMapping>();
-        character = GameObject.Find("Mech").GetComponent<CharacterController>();
+        character = GameObject.Find("Player").GetComponent<CharacterController>();
         rig = xrRig.GetComponent<XRRig>();
     }
 
