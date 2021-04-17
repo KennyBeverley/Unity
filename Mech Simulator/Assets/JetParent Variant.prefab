@@ -586,6 +586,10 @@ PrefabInstance:
       value: JetParent Variant
       objectReference: {fileID: 0}
     - target: {fileID: 437030502756903836, guid: 88e366e6dfed3974b810f72fd4c606ee, type: 3}
+      propertyPath: rocket
+      value: 
+      objectReference: {fileID: 685725347300227086, guid: 9e33d91c1cc0f6241afa6c7a7db51cee, type: 3}
+    - target: {fileID: 437030502756903836, guid: 88e366e6dfed3974b810f72fd4c606ee, type: 3}
       propertyPath: rockets.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -762,6 +766,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6383061930267095983}
     m_Modifications:
+    - target: {fileID: 19657381237272797, guid: 5fd83b229e72104478a8d4e324218e4f, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19657381237272797, guid: 5fd83b229e72104478a8d4e324218e4f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 19657381237272798, guid: 5fd83b229e72104478a8d4e324218e4f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 19657381237272798, guid: 5fd83b229e72104478a8d4e324218e4f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 19657381370622240, guid: 5fd83b229e72104478a8d4e324218e4f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -792,11 +812,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19657381370622240, guid: 5fd83b229e72104478a8d4e324218e4f, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 19657381370622240, guid: 5fd83b229e72104478a8d4e324218e4f, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 19657381370622240, guid: 5fd83b229e72104478a8d4e324218e4f, type: 3}
       propertyPath: m_LocalPosition.x

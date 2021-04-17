@@ -7,6 +7,7 @@ public enum JetState { descend, hover, seek, fight, die }
 public class JetAI : MonoBehaviour
 {
     public GameObject explosion;
+    public GameObject rocket;
     public GameObject[] rockets;
     private float nextRocketFireTime;
     private int rocketCount;
@@ -79,7 +80,6 @@ public class JetAI : MonoBehaviour
                 //Debug.Log(distanceToPlayer);
                 if (distanceToPlayer < 13)
                 {
-                    Debug.Log("too close");
                     transform.parent.position += (transform.parent.position + (transform.parent.position - player.transform.position)).normalized * Time.deltaTime * 5;
                     //nav.SetDestination(transform.parent.position + (transform.parent.position - player.transform.position));
                 }
@@ -121,7 +121,8 @@ public class JetAI : MonoBehaviour
 
     private void FireRockets()
     {
-        rockets[rocketCount].GetComponent<Rocket>().enabled = true;
+        Instantiate(rocket, rockets[rocketCount].transform.position, Quaternion.identity);
+        //rockets[rocketCount].GetComponent<Rocket>().enabled = true;
         rocketCount++;
     }
 

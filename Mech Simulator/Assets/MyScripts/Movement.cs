@@ -42,12 +42,10 @@ public class Movement : MonoBehaviour
         character.Move(direction * Time.fixedDeltaTime * speed);
         if (controlls.rightStick.x > 0)
         {
-            Debug.Log("turn");
             character.transform.Rotate(0, .3f, 0);
         }
         if (controlls.rightStick.x < 0)
         {
-            Debug.Log("turn");
             character.transform.Rotate(0, -.3f, 0);
         }
 

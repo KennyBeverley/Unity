@@ -24,16 +24,23 @@ public class Spawner : MonoBehaviour
     {
         if (Time.time > nextSpawnTime)
         {
-            Vector3 offset = new Vector3(0, 0, CreateRandomFloat(-10, 10));
+            Vector3 offset = new Vector3(CreateRandomFloat(10, 40), 0, CreateRandomFloat(40, 100));
             Instantiate(spawn, transform.position + offset, Quaternion.identity);
-            nextSpawnTime = Time.time + CreateRandomFloat(minDelay, maxDelay);
+            nextSpawnTime = Time.time + Random.Range(minDelay, maxDelay);
         }
     }
     
 
     public float CreateRandomFloat(float min, float max)
     {
-        return Random.Range(min, max);
+        if(Random.Range(0, 2) == 0)
+        {
+            return Random.Range(-min, -max);
+        }
+        else
+        {
+            return Random.Range(min, max);
+        }
     }
 
    
