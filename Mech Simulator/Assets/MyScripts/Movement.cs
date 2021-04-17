@@ -19,6 +19,13 @@ public class Movement : MonoBehaviour
     public GameObject groundCheck;
     public LayerMask mask;
 
+    private AudioSource audio;
+    private bool isWalking;
+    private Animator anim;
+
+    private float nextPauseTime;
+    private bool isPaused;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +33,8 @@ public class Movement : MonoBehaviour
         controlls = gm.GetComponent<VRMapping>();
         character = GameObject.Find("Player").GetComponent<CharacterController>();
         rig = xrRig.GetComponent<XRRig>();
+        audio = GetComponent<AudioSource>();
+        anim = transform.GetChild(0).GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -36,18 +45,46 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        
         Quaternion headYaw = Quaternion.Euler(0, rig.cameraGameObject.transform.eulerAngles.y, 0);
         Vector3 direction = headYaw * new Vector3(controlls.leftStick.x, 0, controlls.leftStick.y);
+        
+        if (controlls.leftStick.y > .5 || controlls.leftStick.y < -.5)
+        {
+            if (!isWalking)
+            {
+                anim.Play("MechWalk");
+                anim.SetBool("isWalking", true);
+                
+                isWalking = true;                
+                
+            }
+            if (Time.time > nextPauseTime)
+            {
+                StartCoroutine(Pause());
 
-        character.Move(direction * Time.fixedDeltaTime * speed);
-        if (controlls.rightStick.x > 0)
-        {
-            character.transform.Rotate(0, .3f, 0);
+            }
+            if (!isPaused)
+            {
+                character.Move(direction * Time.fixedDeltaTime * speed);
+            }
+            if (controlls.rightStick.x > 0)
+            {
+                character.transform.Rotate(0, .3f, 0);
+            }
+            if (controlls.rightStick.x < 0)
+            {
+                character.transform.Rotate(0, -.3f, 0);
+            }
+
         }
-        if (controlls.rightStick.x < 0)
+        else
         {
-            character.transform.Rotate(0, -.3f, 0);
+            anim.SetBool("isWalking", false);
+            audio.Stop();
+            isWalking = false;
         }
+        
 
         if (!grounded)
         {
@@ -82,6 +119,16 @@ public class Movement : MonoBehaviour
         {
             grounded = false;
         }
+    }
+
+    IEnumerator Pause()
+    {
+        nextPauseTime = Time.time + 1;
+        isPaused = false;
+        audio.Play();
+        yield return new WaitForSeconds(.85f);
+        isPaused = true;
+
     }
 
 
