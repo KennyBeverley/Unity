@@ -29,10 +29,10 @@ public class HeadTracking : MonoBehaviour
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(viewPoint.transform.position);
 
-        if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, mask))
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, mask))
         {
             Transform objectHit = hit.transform;
-            if(objectHit.gameObject.layer == 6)
+            if (objectHit.gameObject.layer == 6)
             {
                 //text.text = hit.transform.name + "";
                 crosshairs.GetComponent<Image>().color = Color.green;
@@ -43,20 +43,21 @@ public class HeadTracking : MonoBehaviour
                 crosshairs.GetComponent<Image>().color = Color.red;
             }
             point = hit.point;
-            if (objectHit.name == "RightWall") {
+            if (objectHit.name == "RightWall")
+            {
                 mech.transform.Rotate(0, rotationSpeed, 0);
             }
-            if(objectHit.name == "LeftWall")
+            if (objectHit.name == "LeftWall")
             {
                 mech.transform.Rotate(0, -rotationSpeed, 0);
             }
             if (objectHit.name == "RightQuarterWall")
             {
-                mech.transform.Rotate(0, rotationSpeed *.5f, 0);
+                mech.transform.Rotate(0, rotationSpeed * .5f, 0);
             }
             if (objectHit.name == "LeftQuarterWall")
             {
-                mech.transform.Rotate(0, -rotationSpeed *.5f, 0);
+                mech.transform.Rotate(0, -rotationSpeed * .5f, 0);
             }
 
             if (objectHit.gameObject.layer != 8)
@@ -69,7 +70,7 @@ public class HeadTracking : MonoBehaviour
                 leftTurret.transform.localEulerAngles = new Vector3(0, 0, 0);
                 rightTurret.transform.localEulerAngles = new Vector3(0, 0, 0);
             }
-            
+
         }
     }
 }

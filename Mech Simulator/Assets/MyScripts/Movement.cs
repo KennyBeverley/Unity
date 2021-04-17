@@ -8,7 +8,7 @@ public class Movement : MonoBehaviour
 {
     public float speed;
     public GameObject xrRig;
-    
+
     private XRRig rig;
     private CharacterController character;
 
@@ -31,7 +31,7 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void FixedUpdate()
@@ -40,7 +40,7 @@ public class Movement : MonoBehaviour
         Vector3 direction = headYaw * new Vector3(controlls.leftStick.x, 0, controlls.leftStick.y);
 
         character.Move(direction * Time.fixedDeltaTime * speed);
-        if(controlls.rightStick.x > 0)
+        if (controlls.rightStick.x > 0)
         {
             Debug.Log("turn");
             character.transform.Rotate(0, .3f, 0);
@@ -64,11 +64,11 @@ public class Movement : MonoBehaviour
         {
             grounded = false;
         }
-        
+
 
     }
 
-    
+
 
     private void OnTriggerStay(Collider other)
     {
@@ -86,6 +86,7 @@ public class Movement : MonoBehaviour
         }
     }
 
-    
-    
+
+
 }
+

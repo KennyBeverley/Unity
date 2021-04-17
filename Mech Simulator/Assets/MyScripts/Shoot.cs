@@ -33,7 +33,7 @@ public class Shoot : MonoBehaviour
 
     private float nextPlasmaRecharge;
     private float nextEnergyRecharge;
-    
+
     private bool primaryPressed = false;
 
     private float nextShot;
@@ -61,7 +61,7 @@ public class Shoot : MonoBehaviour
     {
         rechargeAmmo();
         ///////////////////////left primary///////////////////
-        if ((controlls.leftPrimary || controlls.rightPrimary) && (controlls.leftTrigger < .2f || controlls.rightTrigger <.2f))
+        if ((controlls.leftPrimary || controlls.rightPrimary) && (controlls.leftTrigger < .2f || controlls.rightTrigger < .2f))
         {
             if (!primaryPressed)
             {
@@ -90,7 +90,7 @@ public class Shoot : MonoBehaviour
             primaryPressed = false;
         }
         /////////////////////////////////////////////////////
-        
+
         /////////////////////////right primary////////////////////
         if ((controlls.leftSecondary || controlls.rightSecondary))
         {
@@ -111,7 +111,7 @@ public class Shoot : MonoBehaviour
             }
         }
         /////////////////////////////////////////////////////////////
-        
+
 
         if ((controlls.leftTrigger > .2f || controlls.rightTrigger > .2f) && !(controlls.leftSecondary || controlls.rightSecondary))
         {
@@ -125,14 +125,14 @@ public class Shoot : MonoBehaviour
                 electric2.transform.position = rightFirePoint.transform.position;
                 electric2.transform.eulerAngles = rightFirePoint.transform.parent.eulerAngles;
 
-                
+
             }
             else
             {
                 if (Time.time > nextShot && plasmaAmmo > 0)
                 {
 
-                    
+
                     Vector3 point = GetComponent<HeadTracking>().point;
                     var clone = Instantiate(ammo, leftFirePoint.transform.position, Quaternion.identity);
                     clone.GetComponent<Bullet>().direction = (point - leftFirePoint.transform.position).normalized;
@@ -145,12 +145,12 @@ public class Shoot : MonoBehaviour
                     Destroy(clone, 5);
                     Destroy(clone2, 5);
                     plasmaAmmo--;
-                    
+
                 }
             }
 
 
-            
+
 
 
         }
@@ -167,7 +167,7 @@ public class Shoot : MonoBehaviour
         lightningScreen.GetComponent<Renderer>().material = selectedMat;
         plasmaScreen.GetComponent<Renderer>().material = normalMat;
         shieldScreen.GetComponent<Renderer>().material = normalMat;
-        
+
     }
 
     private void setPlasma()
@@ -175,7 +175,7 @@ public class Shoot : MonoBehaviour
         lightningScreen.GetComponent<Renderer>().material = normalMat;
         plasmaScreen.GetComponent<Renderer>().material = selectedMat;
         shieldScreen.GetComponent<Renderer>().material = normalMat;
-        
+
     }
 
     private void setShield()
@@ -183,7 +183,7 @@ public class Shoot : MonoBehaviour
         lightningScreen.GetComponent<Renderer>().material = normalMat;
         plasmaScreen.GetComponent<Renderer>().material = normalMat;
         shieldScreen.GetComponent<Renderer>().material = selectedMat;
-        
+
     }
 
     private void rechargeAmmo()
@@ -202,7 +202,7 @@ public class Shoot : MonoBehaviour
         }
         else
         {
-            
+
         }
 
         pAmmoDisplay.text = plasmaAmmo + "/ 10";
