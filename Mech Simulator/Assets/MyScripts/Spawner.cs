@@ -12,6 +12,8 @@ public class Spawner : MonoBehaviour
 
     public float nextSpawnTime;
 
+    private bool canSpawn;
+
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +24,12 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time > nextSpawnTime)
+        if (Input.GetKey(KeyCode.Space))
+        {
+            canSpawn = true;
+        }
+
+        if (Time.time > nextSpawnTime && canSpawn)
         {
             Vector3 offset = new Vector3(CreateRandomFloat(10, 40), 0, CreateRandomFloat(40, 100));
             Instantiate(spawn, transform.position + offset, Quaternion.identity);

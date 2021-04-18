@@ -59,7 +59,7 @@ public class MagicBeamStatic : MonoBehaviour
                         if(Time.time > nextBeamHitTime)
                         {
                             hit.transform.GetComponent<EnemyStats>().TakeDamage(1);
-                            nextBeamHitTime = Time.time + 1;
+                            nextBeamHitTime = Time.time + .8f;
                         }
                         
                     }

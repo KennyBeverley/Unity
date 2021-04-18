@@ -25,6 +25,9 @@ public class Shoot : MonoBehaviour
     public Material normalMat;
     public Material selectedMat;
 
+    public Material normalScreenMat;
+    public Material selectedScreenMat;
+
     private int maxPlasmaAmmo = 10;
     private int maxElectricEnergy;
 
@@ -54,6 +57,9 @@ public class Shoot : MonoBehaviour
         controlls = gm.GetComponent<VRMapping>();
         electricRange = GameObject.Find("ElectricRange");
         plasmaRange = GameObject.Find("PlasmaRange");
+        isElectric = false;
+        plasmaRange.gameObject.SetActive(true);
+        electricRange.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -168,6 +174,10 @@ public class Shoot : MonoBehaviour
         plasmaScreen.GetComponent<Renderer>().material = normalMat;
         shieldScreen.GetComponent<Renderer>().material = normalMat;
 
+        lightningScreen.transform.GetChild(0).GetComponent<Renderer>().material = selectedScreenMat;
+        plasmaScreen.transform.GetChild(0).GetComponent<Renderer>().material = normalScreenMat;
+        shieldScreen.transform.GetChild(0).GetComponent<Renderer>().material = normalScreenMat;
+
     }
 
     private void setPlasma()
@@ -176,6 +186,10 @@ public class Shoot : MonoBehaviour
         plasmaScreen.GetComponent<Renderer>().material = selectedMat;
         shieldScreen.GetComponent<Renderer>().material = normalMat;
 
+        lightningScreen.transform.GetChild(0).GetComponent<Renderer>().material = normalScreenMat;
+        plasmaScreen.transform.GetChild(0).GetComponent<Renderer>().material = selectedScreenMat;
+        shieldScreen.transform.GetChild(0).GetComponent<Renderer>().material = normalScreenMat;
+
     }
 
     private void setShield()
@@ -183,6 +197,10 @@ public class Shoot : MonoBehaviour
         lightningScreen.GetComponent<Renderer>().material = normalMat;
         plasmaScreen.GetComponent<Renderer>().material = normalMat;
         shieldScreen.GetComponent<Renderer>().material = selectedMat;
+
+        lightningScreen.transform.GetChild(0).GetComponent<Renderer>().material = normalScreenMat;
+        plasmaScreen.transform.GetChild(0).GetComponent<Renderer>().material = normalScreenMat;
+        shieldScreen.transform.GetChild(0).GetComponent<Renderer>().material = selectedScreenMat;
 
     }
 

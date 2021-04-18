@@ -6210,6 +6210,8 @@ MonoBehaviour:
   shieldScreen: {fileID: 0}
   normalMat: {fileID: 0}
   selectedMat: {fileID: 0}
+  normalScreenMat: {fileID: 0}
+  selectedScreenMat: {fileID: 0}
 --- !u!114 &1189723337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8662,7 +8664,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5038365b761ad9d459c183bd62695554, type: 2}
+  - {fileID: 2100000, guid: 0097075dbaa3a904791b710e851d487b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11183,6 +11185,8 @@ MonoBehaviour:
   shieldScreen: {fileID: 8936147660965162141}
   normalMat: {fileID: 2100000, guid: 1b1a016856447204289da1fec2ee17e7, type: 2}
   selectedMat: {fileID: 2100000, guid: 6dc6d4ffd64f07f4e9f3e6b9f78b850e, type: 2}
+  normalScreenMat: {fileID: 2100000, guid: 5038365b761ad9d459c183bd62695554, type: 2}
+  selectedScreenMat: {fileID: 2100000, guid: 0097075dbaa3a904791b710e851d487b, type: 2}
 --- !u!143 &2928594805759483982
 CharacterController:
   m_ObjectHideFlags: 0
