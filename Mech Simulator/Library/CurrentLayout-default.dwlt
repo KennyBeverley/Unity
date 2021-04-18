@@ -119,10 +119,10 @@ MonoBehaviour:
     y: 30
     width: 1536
     height: 731
-  m_MinSize: {x: 678, y: 492}
-  m_MaxSize: {x: 14001, y: 14042}
+  m_MinSize: {x: 679, y: 492}
+  m_MaxSize: {x: 14002, y: 14042}
   vertical: 0
-  controlID: 59
+  controlID: 132
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 492}
   m_MaxSize: {x: 10001, y: 14042}
   vertical: 1
-  controlID: 60
+  controlID: 86
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -276,8 +276,8 @@ MonoBehaviour:
     y: 0
     width: 421
     height: 731
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 21}
   m_Panes:
   - {fileID: 21}
@@ -401,9 +401,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 964f0000
-      m_LastClickedID: 20374
-      m_ExpandedIDs: 20fbffffb04d00006c4f0000ec4f0000c2500000b651000062520000
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 1afbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -786,7 +786,7 @@ MonoBehaviour:
     height: 251
   m_ViewDataDictionary: {fileID: 0}
   m_SearchFilter:
-    m_NameFilter: 
+    m_NameFilter: rock
     m_ClassNames: []
     m_AssetLabels: []
     m_AssetBundleNames: []
@@ -798,22 +798,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/MagicArsenal/Effects/Scripts
+    - Assets
     m_Globs: []
-    m_OriginalText: 
+    m_OriginalText: rock
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/MagicArsenal/Effects/Scripts
+  - Assets
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\CMPS499\Unity\Mech Simulator
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 473}
-    m_SelectedIDs: f8680000
-    m_LastClickedID: 26872
-    m_ExpandedIDs: 00000000dc5b0000de5b0000e05b0000e25b0000e45b0000e65b0000125c000000ca9a3b
+    scrollPos: {x: 0, y: 79}
+    m_SelectedIDs: e45b0000
+    m_LastClickedID: 23524
+    m_ExpandedIDs: 00000000e45b0000e65b0000e85b0000ea5b0000ec5b0000ee5b00001a5c000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -841,7 +841,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000dc5b0000de5b0000e05b0000e25b0000e45b0000e65b0000
+    m_ExpandedIDs: 00000000e45b0000e65b0000e85b0000ea5b0000ec5b0000ee5b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -893,7 +893,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 0}
+    m_ScrollPosition: {x: 0, y: 89}
     m_GridSize: 64
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 207
