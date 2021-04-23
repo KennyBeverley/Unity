@@ -11154,7 +11154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c15cb7f4a0510174a9261eea6f93b35d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
+  speed: 6
   xrRig: {fileID: 2043481745}
   groundCheck: {fileID: 748186111}
   mask:

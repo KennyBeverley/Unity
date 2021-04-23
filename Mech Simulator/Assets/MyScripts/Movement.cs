@@ -40,16 +40,17 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+       
     }
 
     private void FixedUpdate()
     {
         
         Quaternion headYaw = Quaternion.Euler(0, rig.cameraGameObject.transform.eulerAngles.y, 0);
-        Vector3 direction = headYaw * new Vector3(controlls.leftStick.x, 0, controlls.leftStick.y);
+        //Vector3 direction = headYaw * new Vector3(controlls.leftStick.x, 0, controlls.leftStick.y);
+        Vector3 direction = transform.TransformDirection(Vector3.forward);
         
-        if (controlls.leftStick.y > .5 || controlls.leftStick.y < -.5)
+        if (controlls.leftStick.y > .5 || controlls.leftStick.y < -.5 || Input.GetAxis("Throttle") > .5f || Input.GetAxis("Throttle") < -.5f)
         {
             if (!isWalking)
             {
@@ -66,16 +67,9 @@ public class Movement : MonoBehaviour
             }
             if (!isPaused)
             {
-                character.Move(direction * Time.fixedDeltaTime * speed);
+                character.Move(direction * Time.fixedDeltaTime * speed * Input.GetAxis("Throttle"));
             }
-            if (controlls.rightStick.x > 0)
-            {
-                character.transform.Rotate(0, .3f, 0);
-            }
-            if (controlls.rightStick.x < 0)
-            {
-                character.transform.Rotate(0, -.3f, 0);
-            }
+            
 
         }
         else
@@ -84,7 +78,16 @@ public class Movement : MonoBehaviour
             audio.Stop();
             isWalking = false;
         }
-        
+
+        if (controlls.rightStick.x > 0 || Input.GetAxis("Twist") < 0)
+        {
+            character.transform.Rotate(0, .3f, 0);
+        }
+        if (controlls.rightStick.x < 0 || Input.GetAxis("Twist") > 0)
+        {
+            character.transform.Rotate(0, -.3f, 0);
+        }
+
 
         if (!grounded)
         {

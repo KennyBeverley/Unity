@@ -40,6 +40,7 @@ public class Shoot : MonoBehaviour
     private bool primaryPressed = false;
 
     private float nextShot;
+    private bool firingMissiles;
 
     private bool isElectric;
     private GameObject gm;
@@ -65,9 +66,20 @@ public class Shoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetButton("Fire1"))
+        {
+            
+        }
+        
+        else
+        {
+            firingMissiles = false;
+        }
+
+        
         rechargeAmmo();
         ///////////////////////left primary///////////////////
-        if ((controlls.leftPrimary || controlls.rightPrimary) && (controlls.leftTrigger < .2f || controlls.rightTrigger < .2f))
+        if ((controlls.leftPrimary || controlls.rightPrimary) && (controlls.leftTrigger < .2f || controlls.rightTrigger < .2f) || Input.GetButton("Fire2"))
         {
             if (!primaryPressed)
             {
@@ -98,7 +110,7 @@ public class Shoot : MonoBehaviour
         /////////////////////////////////////////////////////
 
         /////////////////////////right primary////////////////////
-        if ((controlls.leftSecondary || controlls.rightSecondary))
+        if ((controlls.leftSecondary || controlls.rightSecondary || Input.GetButton("Fire3") || Input.GetButton("Jump")))
         {
             shield.SetActive(true);
 
@@ -119,7 +131,7 @@ public class Shoot : MonoBehaviour
         /////////////////////////////////////////////////////////////
 
 
-        if ((controlls.leftTrigger > .2f || controlls.rightTrigger > .2f) && !(controlls.leftSecondary || controlls.rightSecondary))
+        if ((controlls.leftTrigger > .2f || controlls.rightTrigger > .2f) && !(controlls.leftSecondary || controlls.rightSecondary) || Input.GetButton("Fire1"))
         {
             if (isElectric)
             {
@@ -207,7 +219,7 @@ public class Shoot : MonoBehaviour
     private void rechargeAmmo()
     {
 
-        if (isElectric)
+        if (!firingMissiles)
         {
             if (Time.time > nextPlasmaRecharge)
             {

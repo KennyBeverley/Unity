@@ -47,25 +47,23 @@ public class HeadTracking : MonoBehaviour
                 crosshairs.GetComponent<Image>().color = Color.red;
             }
             point = hit.point;
-            if(controlls.leftStick.y > .5 || controlls.leftStick.y < -.5)
+            if (objectHit.name == "RightWall")
             {
-                if (objectHit.name == "RightWall")
-                {
-                    mech.transform.Rotate(0, rotationSpeed, 0);
-                }
-                if (objectHit.name == "LeftWall")
-                {
-                    mech.transform.Rotate(0, -rotationSpeed, 0);
-                }
-                if (objectHit.name == "RightQuarterWall")
-                {
-                    mech.transform.Rotate(0, rotationSpeed * .5f, 0);
-                }
-                if (objectHit.name == "LeftQuarterWall")
-                {
-                    mech.transform.Rotate(0, -rotationSpeed * .5f, 0);
-                }
+                mech.transform.Rotate(0, rotationSpeed, 0);
             }
+            if (objectHit.name == "LeftWall")
+            {
+                mech.transform.Rotate(0, -rotationSpeed, 0);
+            }
+            if (objectHit.name == "RightQuarterWall")
+            {
+                mech.transform.Rotate(0, rotationSpeed * .5f, 0);
+            }
+            if (objectHit.name == "LeftQuarterWall")
+            {
+                mech.transform.Rotate(0, -rotationSpeed * .5f, 0);
+            }
+           
             
 
             if (objectHit.gameObject.layer != 8)
