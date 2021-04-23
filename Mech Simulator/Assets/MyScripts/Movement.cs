@@ -6,6 +6,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class Movement : MonoBehaviour
 {
+    public bool usingHotas;
     public float speed;
     public GameObject xrRig;
 
@@ -67,7 +68,15 @@ public class Movement : MonoBehaviour
             }
             if (!isPaused)
             {
-                character.Move(direction * Time.fixedDeltaTime * speed * Input.GetAxis("Throttle"));
+                if (Input.GetAxis("Throttle") > Mathf.Abs(.5f))
+                {
+                    character.Move(direction * Time.fixedDeltaTime * speed * Input.GetAxis("Throttle"));
+                }
+                else
+                {
+                    character.Move(direction * Time.fixedDeltaTime * speed * controlls.leftStick.y);
+                }
+                
             }
             
 
@@ -79,11 +88,11 @@ public class Movement : MonoBehaviour
             isWalking = false;
         }
 
-        if (controlls.rightStick.x > 0 || Input.GetAxis("Twist") < 0)
+        if (controlls.rightStick.x > 0 || Input.GetAxis("Twist") < 0 || Input.GetAxis("Horizontal") > 0)
         {
             character.transform.Rotate(0, .3f, 0);
         }
-        if (controlls.rightStick.x < 0 || Input.GetAxis("Twist") > 0)
+        if (controlls.rightStick.x < 0 || Input.GetAxis("Twist") > 0 || Input.GetAxis("Horizontal") < 0)
         {
             character.transform.Rotate(0, -.3f, 0);
         }

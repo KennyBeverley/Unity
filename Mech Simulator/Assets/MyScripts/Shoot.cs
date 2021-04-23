@@ -77,6 +77,8 @@ public class Shoot : MonoBehaviour
         }
 
         
+
+
         rechargeAmmo();
         ///////////////////////left primary///////////////////
         if ((controlls.leftPrimary || controlls.rightPrimary) && (controlls.leftTrigger < .2f || controlls.rightTrigger < .2f) || Input.GetButton("Fire2"))
