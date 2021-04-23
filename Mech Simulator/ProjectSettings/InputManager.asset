@@ -708,7 +708,7 @@ InputManager:
     invert: 1
     type: 2
     axis: 2
-    joyNum: 4
+    joyNum: 2
   - serializedVersion: 3
     m_Name: Twist
     descriptiveName: 
@@ -724,4 +724,4 @@ InputManager:
     invert: 1
     type: 2
     axis: 2
-    joyNum: 3
+    joyNum: 1
