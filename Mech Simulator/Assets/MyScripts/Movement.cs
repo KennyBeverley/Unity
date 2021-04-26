@@ -51,7 +51,7 @@ public class Movement : MonoBehaviour
         //Vector3 direction = headYaw * new Vector3(controlls.leftStick.x, 0, controlls.leftStick.y);
         Vector3 direction = transform.TransformDirection(Vector3.forward);
         
-        if (controlls.leftStick.y > .5 || controlls.leftStick.y < -.5 || Input.GetAxis("Throttle") > .5f || Input.GetAxis("Throttle") < -.5f)
+        if (controlls.leftStick.y > .5 || controlls.leftStick.y < -.5 || Input.GetAxis("Throttle") > .5f || Input.GetAxis("Throttle") < -.5f || Input.GetAxis("Vertical") > .5f || Input.GetAxis("Vertical") < -.5f)
         {
             if (!isWalking)
             {
@@ -68,13 +68,22 @@ public class Movement : MonoBehaviour
             }
             if (!isPaused)
             {
-                if (Input.GetAxis("Throttle") > Mathf.Abs(.5f))
+                if (Input.GetAxis("Throttle") > .5f || Input.GetAxis("Throttle") < -.5f)
                 {
                     character.Move(direction * Time.fixedDeltaTime * speed * Input.GetAxis("Throttle"));
+                    Debug.Log(Input.GetAxis("Throttle"));
                 }
                 else
                 {
-                    character.Move(direction * Time.fixedDeltaTime * speed * controlls.leftStick.y);
+                    if(Input.GetAxis("Vertical") > .5f || Input.GetAxis("Vertical") < -.5f)
+                    {
+                        character.Move(direction * Time.fixedDeltaTime * speed * Input.GetAxis("Vertical"));
+                    }
+                    else
+                    {
+                        character.Move(direction * Time.fixedDeltaTime * speed * controlls.leftStick.y);
+                    }
+                    
                 }
                 
             }
@@ -88,11 +97,11 @@ public class Movement : MonoBehaviour
             isWalking = false;
         }
 
-        if (controlls.rightStick.x > 0 || Input.GetAxis("Twist") < 0 || Input.GetAxis("Horizontal") > 0)
+        if (controlls.rightStick.x > .5f || Input.GetAxis("Twist") < -.5f || Input.GetAxis("Horizontal") > .5f)
         {
             character.transform.Rotate(0, .3f, 0);
         }
-        if (controlls.rightStick.x < 0 || Input.GetAxis("Twist") > 0 || Input.GetAxis("Horizontal") < 0)
+        if (controlls.rightStick.x < -.5f || Input.GetAxis("Twist") > .5f || Input.GetAxis("Horizontal") < -.5f)
         {
             character.transform.Rotate(0, -.3f, 0);
         }
