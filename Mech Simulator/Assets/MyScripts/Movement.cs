@@ -53,6 +53,7 @@ public class Movement : MonoBehaviour
         
         if (controlls.leftStick.y > .5 || controlls.leftStick.y < -.5 || Input.GetAxis("Throttle") > .5f || Input.GetAxis("Throttle") < -.5f || Input.GetAxis("Vertical") > .5f || Input.GetAxis("Vertical") < -.5f)
         {
+            Debug.Log("walking");
             if (!isWalking)
             {
                 anim.Play("MechWalk");
@@ -79,7 +80,7 @@ public class Movement : MonoBehaviour
                     {
                         character.Move(direction * Time.fixedDeltaTime * speed * Input.GetAxis("Vertical"));
                     }
-                    else
+                    else if(controlls.leftStick.y > .5f || controlls.leftStick.y < .5f)
                     {
                         character.Move(direction * Time.fixedDeltaTime * speed * controlls.leftStick.y);
                     }
