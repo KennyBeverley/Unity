@@ -27,6 +27,7 @@ public class Shoot : MonoBehaviour
 
     public Material normalScreenMat;
     public Material selectedScreenMat;
+    public Material criticalScreenMat;
 
     private int maxPlasmaAmmo = 10;
     private int maxElectricEnergy;
@@ -189,7 +190,15 @@ public class Shoot : MonoBehaviour
         shieldScreen.GetComponent<Renderer>().material = normalMat;
 
         lightningScreen.transform.GetChild(0).GetComponent<Renderer>().material = selectedScreenMat;
-        plasmaScreen.transform.GetChild(0).GetComponent<Renderer>().material = normalScreenMat;
+        if(plasmaAmmo < 1)
+        {
+            plasmaScreen.transform.GetChild(0).GetComponent<Renderer>().material = criticalScreenMat;
+        }
+        else
+        {
+            plasmaScreen.transform.GetChild(0).GetComponent<Renderer>().material = normalScreenMat;
+        }
+        
         shieldScreen.transform.GetChild(0).GetComponent<Renderer>().material = normalScreenMat;
 
     }
@@ -201,7 +210,14 @@ public class Shoot : MonoBehaviour
         shieldScreen.GetComponent<Renderer>().material = normalMat;
 
         lightningScreen.transform.GetChild(0).GetComponent<Renderer>().material = normalScreenMat;
-        plasmaScreen.transform.GetChild(0).GetComponent<Renderer>().material = selectedScreenMat;
+        if (plasmaAmmo < 1)
+        {
+            plasmaScreen.transform.GetChild(0).GetComponent<Renderer>().material = criticalScreenMat;
+        }
+        else
+        {
+            plasmaScreen.transform.GetChild(0).GetComponent<Renderer>().material = selectedScreenMat;
+        }
         shieldScreen.transform.GetChild(0).GetComponent<Renderer>().material = normalScreenMat;
 
     }
@@ -213,7 +229,14 @@ public class Shoot : MonoBehaviour
         shieldScreen.GetComponent<Renderer>().material = selectedMat;
 
         lightningScreen.transform.GetChild(0).GetComponent<Renderer>().material = normalScreenMat;
-        plasmaScreen.transform.GetChild(0).GetComponent<Renderer>().material = normalScreenMat;
+        if (plasmaAmmo < 1)
+        {
+            plasmaScreen.transform.GetChild(0).GetComponent<Renderer>().material = criticalScreenMat;
+        }
+        else
+        {
+            plasmaScreen.transform.GetChild(0).GetComponent<Renderer>().material = normalScreenMat;
+        }
         shieldScreen.transform.GetChild(0).GetComponent<Renderer>().material = selectedScreenMat;
 
     }
@@ -229,7 +252,7 @@ public class Shoot : MonoBehaviour
                 {
                     plasmaAmmo++;
                 }
-                nextPlasmaRecharge = Time.time + 2;
+                nextPlasmaRecharge = Time.time + 3;
             }
         }
         else

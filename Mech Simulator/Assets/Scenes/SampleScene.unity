@@ -2434,15 +2434,15 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 535351272}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.04}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.05}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 191536219}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.001, y: 0.212}
+  m_AnchoredPosition: {x: -0.001, y: -0.034}
   m_SizeDelta: {x: 5, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &535351274
@@ -3288,7 +3288,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 798911042}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 32.03}
+  m_LocalPosition: {x: 0, y: 0, z: 35.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1423059933}
@@ -5181,6 +5181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c15cb7f4a0510174a9261eea6f93b35d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controllerRotationSpeed: 0
   usingHotas: 0
   speed: 6
   xrRig: {fileID: 2034234957}
@@ -5215,6 +5216,7 @@ MonoBehaviour:
   selectedMat: {fileID: 2100000, guid: 6dc6d4ffd64f07f4e9f3e6b9f78b850e, type: 2}
   normalScreenMat: {fileID: 2100000, guid: 5038365b761ad9d459c183bd62695554, type: 2}
   selectedScreenMat: {fileID: 2100000, guid: 0097075dbaa3a904791b710e851d487b, type: 2}
+  criticalScreenMat: {fileID: 0}
 --- !u!143 &1099840668
 CharacterController:
   m_ObjectHideFlags: 0
@@ -9120,6 +9122,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11443916, guid: 24070aaeb9133d44aa92828a2c4af971, type: 3}
+      propertyPath: beamLength
+      value: 25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24070aaeb9133d44aa92828a2c4af971, type: 3}
 --- !u!1 &1738165771
@@ -9188,7 +9194,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0097075dbaa3a904791b710e851d487b, type: 2}
+  - {fileID: 2100000, guid: 70d939fe5edb0df459052dff12910ee2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11561,6 +11567,7 @@ GameObject:
   - component: {fileID: 2928594805759483983}
   - component: {fileID: 2928594805759483984}
   - component: {fileID: 2928594805759483985}
+  - component: {fileID: 2928594805759483986}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -11600,8 +11607,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c15cb7f4a0510174a9261eea6f93b35d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controllerRotationSpeed: 0.5
   usingHotas: 1
-  speed: 6
+  speed: 10
   xrRig: {fileID: 2043481745}
   groundCheck: {fileID: 748186111}
   mask:
@@ -11633,7 +11641,8 @@ MonoBehaviour:
   normalMat: {fileID: 2100000, guid: 1b1a016856447204289da1fec2ee17e7, type: 2}
   selectedMat: {fileID: 2100000, guid: 6dc6d4ffd64f07f4e9f3e6b9f78b850e, type: 2}
   normalScreenMat: {fileID: 2100000, guid: 5038365b761ad9d459c183bd62695554, type: 2}
-  selectedScreenMat: {fileID: 2100000, guid: 0097075dbaa3a904791b710e851d487b, type: 2}
+  selectedScreenMat: {fileID: 2100000, guid: 70d939fe5edb0df459052dff12910ee2, type: 2}
+  criticalScreenMat: {fileID: 2100000, guid: 0097075dbaa3a904791b710e851d487b, type: 2}
 --- !u!143 &2928594805759483982
 CharacterController:
   m_ObjectHideFlags: 0
@@ -11791,6 +11800,19 @@ MonoBehaviour:
   tranRifle: {fileID: 2100000, guid: 86a3102a51c68324f8976232f9a659dc, type: 2}
   solidRifle: {fileID: 2100000, guid: 8b91047244ae6504f95c7c160c2ae5e1, type: 2}
   isSolid: 1
+--- !u!114 &2928594805759483986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2928594805759483978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e17b0bdba968d5e4ebd7e3848aa1f18d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHP: 10
 --- !u!23 &3080507113735787118
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12623,7 +12645,7 @@ GameObject:
   - component: {fileID: 5855346752321745924}
   - component: {fileID: 6403464424319581299}
   - component: {fileID: 6403464424319581298}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: RightQuarterWall
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -12986,7 +13008,7 @@ GameObject:
   - component: {fileID: 6796407875601697512}
   - component: {fileID: 8556193970586533708}
   - component: {fileID: 8556193970586533707}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: LeftQuarterWall
   m_TagString: Player
   m_Icon: {fileID: 0}

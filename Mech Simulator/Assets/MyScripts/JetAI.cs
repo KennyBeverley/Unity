@@ -19,6 +19,11 @@ public class JetAI : MonoBehaviour
     private float distanceToPlayer;
     private NavMeshAgent nav;
 
+    public float minShiftDelay;
+    public float maxShiftDelay;
+    private float nextShiftStart;
+    private float shiftSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +53,7 @@ public class JetAI : MonoBehaviour
 
             case JetState.seek:
                 distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
+                Shift();
                 if (distanceToPlayer > 15)
                 {
                     nav.isStopped = false;
@@ -78,9 +84,10 @@ public class JetAI : MonoBehaviour
             case JetState.fight:
                 distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
                 //Debug.Log(distanceToPlayer);
+                Shift();
                 if (distanceToPlayer < 13)
                 {
-                    transform.parent.position += (transform.parent.position + (transform.parent.position - player.transform.position)).normalized * Time.deltaTime * 5;
+                    transform.parent.position += (transform.parent.position + (transform.parent.position - player.transform.position)).normalized * Time.deltaTime * 10;
                     //nav.SetDestination(transform.parent.position + (transform.parent.position - player.transform.position));
                 }
 
@@ -124,6 +131,17 @@ public class JetAI : MonoBehaviour
         Instantiate(rocket, rockets[rocketCount].transform.position, Quaternion.identity);
         //rockets[rocketCount].GetComponent<Rocket>().enabled = true;
         rocketCount++;
+    }
+
+    private void Shift()
+    {
+        if(Time.time > nextShiftStart)
+        {
+            shiftSpeed = Random.Range(-10, 10);
+            nextShiftStart += 2;
+        }
+
+        transform.parent.position += Vector3.right * Time.deltaTime * shiftSpeed;
     }
 
 }

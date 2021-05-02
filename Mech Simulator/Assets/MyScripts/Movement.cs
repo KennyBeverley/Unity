@@ -6,6 +6,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class Movement : MonoBehaviour
 {
+    public float controllerRotationSpeed;
     public bool usingHotas;
     public float speed;
     public GameObject xrRig;
@@ -100,11 +101,11 @@ public class Movement : MonoBehaviour
 
         if (controlls.rightStick.x > .5f || Input.GetAxis("Twist") < -.5f || Input.GetAxis("Horizontal") > .5f)
         {
-            character.transform.Rotate(0, .3f, 0);
+            character.transform.Rotate(0, controllerRotationSpeed, 0);
         }
         if (controlls.rightStick.x < -.5f || Input.GetAxis("Twist") > .5f || Input.GetAxis("Horizontal") < -.5f)
         {
-            character.transform.Rotate(0, -.3f, 0);
+            character.transform.Rotate(0, -controllerRotationSpeed, 0);
         }
 
 
