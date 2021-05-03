@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5616789301069500006}
   - component: {fileID: 3065388677653324072}
   m_Layer: 9
-  m_Name: Sphere 1
+  m_Name: PlasmaBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129,6 +129,7 @@ MonoBehaviour:
   direction: {x: 0, y: 0, z: 0}
   speed: 30
   impactEffect: {fileID: 8921103224830020987, guid: b2a3db541893dd240a446a0a62652dcc, type: 3}
+  damage: 2
 --- !u!1001 &3210017887567067936
 PrefabInstance:
   m_ObjectHideFlags: 0

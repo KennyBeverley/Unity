@@ -12,7 +12,8 @@ public class Spawner : MonoBehaviour
 
     public float nextSpawnTime;
 
-    private bool canSpawn;
+    private bool canSpawn = true;
+    private float initialSpawnTime;
 
 
     // Start is called before the first frame update
@@ -31,9 +32,10 @@ public class Spawner : MonoBehaviour
 
         if (Time.time > nextSpawnTime && canSpawn)
         {
+            float offsetSpawnTime = (Time.time - initialSpawnTime) / 60;
             Vector3 offset = new Vector3(CreateRandomFloat(10, 40), 0, CreateRandomFloat(40, 100));
             Instantiate(spawn, transform.position + offset, Quaternion.identity);
-            nextSpawnTime = Time.time + Random.Range(minDelay, maxDelay);
+            nextSpawnTime = Time.time + Random.Range(minDelay - offsetSpawnTime, maxDelay - offsetSpawnTime);
         }
     }
     

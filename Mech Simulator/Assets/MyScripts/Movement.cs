@@ -51,77 +51,81 @@ public class Movement : MonoBehaviour
         Quaternion headYaw = Quaternion.Euler(0, rig.cameraGameObject.transform.eulerAngles.y, 0);
         //Vector3 direction = headYaw * new Vector3(controlls.leftStick.x, 0, controlls.leftStick.y);
         Vector3 direction = transform.TransformDirection(Vector3.forward);
+
+        if (!GetComponent<PlayerStats>().isDead)
+        {
+            if (controlls.leftStick.y > .5 || controlls.leftStick.y < -.5 || Input.GetAxis("Throttle") > .5f || Input.GetAxis("Throttle") < -.5f || Input.GetAxis("Vertical") > .5f || Input.GetAxis("Vertical") < -.5f)
+            {
+                Debug.Log("walking");
+                if (!isWalking)
+                {
+                    anim.Play("MechWalk");
+                    anim.SetBool("isWalking", true);
+
+                    isWalking = true;
+
+                }
+                if (Time.time > nextPauseTime)
+                {
+                    StartCoroutine(Pause());
+
+                }
+                if (!isPaused)
+                {
+                    if (Input.GetAxis("Throttle") > .5f || Input.GetAxis("Throttle") < -.5f)
+                    {
+                        character.Move(direction * Time.fixedDeltaTime * speed * Input.GetAxis("Throttle"));
+                        Debug.Log(Input.GetAxis("Throttle"));
+                    }
+                    else
+                    {
+                        if (Input.GetAxis("Vertical") > .5f || Input.GetAxis("Vertical") < -.5f)
+                        {
+                            character.Move(direction * Time.fixedDeltaTime * speed * Input.GetAxis("Vertical"));
+                        }
+                        else if (controlls.leftStick.y > .5f || controlls.leftStick.y < .5f)
+                        {
+                            character.Move(direction * Time.fixedDeltaTime * speed * controlls.leftStick.y);
+                        }
+
+                    }
+
+                }
+
+
+            }
+            else
+            {
+                anim.SetBool("isWalking", false);
+                audio.Stop();
+                isWalking = false;
+            }
+
+            if (controlls.rightStick.x > .5f || Input.GetAxis("Twist") < -.5f || Input.GetAxis("Horizontal") > .5f)
+            {
+                character.transform.Rotate(0, controllerRotationSpeed, 0);
+            }
+            if (controlls.rightStick.x < -.5f || Input.GetAxis("Twist") > .5f || Input.GetAxis("Horizontal") < -.5f)
+            {
+                character.transform.Rotate(0, -controllerRotationSpeed, 0);
+            }
+
+
+            if (!grounded)
+            {
+                transform.position += new Vector3(0, -1f, 0) * Time.deltaTime;
+            }
+
+            if (Physics.CheckSphere(groundCheck.transform.position, .5f, mask))
+            {
+                grounded = true;
+            }
+            else
+            {
+                grounded = false;
+            }
+        }
         
-        if (controlls.leftStick.y > .5 || controlls.leftStick.y < -.5 || Input.GetAxis("Throttle") > .5f || Input.GetAxis("Throttle") < -.5f || Input.GetAxis("Vertical") > .5f || Input.GetAxis("Vertical") < -.5f)
-        {
-            Debug.Log("walking");
-            if (!isWalking)
-            {
-                anim.Play("MechWalk");
-                anim.SetBool("isWalking", true);
-                
-                isWalking = true;                
-                
-            }
-            if (Time.time > nextPauseTime)
-            {
-                StartCoroutine(Pause());
-
-            }
-            if (!isPaused)
-            {
-                if (Input.GetAxis("Throttle") > .5f || Input.GetAxis("Throttle") < -.5f)
-                {
-                    character.Move(direction * Time.fixedDeltaTime * speed * Input.GetAxis("Throttle"));
-                    Debug.Log(Input.GetAxis("Throttle"));
-                }
-                else
-                {
-                    if(Input.GetAxis("Vertical") > .5f || Input.GetAxis("Vertical") < -.5f)
-                    {
-                        character.Move(direction * Time.fixedDeltaTime * speed * Input.GetAxis("Vertical"));
-                    }
-                    else if(controlls.leftStick.y > .5f || controlls.leftStick.y < .5f)
-                    {
-                        character.Move(direction * Time.fixedDeltaTime * speed * controlls.leftStick.y);
-                    }
-                    
-                }
-                
-            }
-            
-
-        }
-        else
-        {
-            anim.SetBool("isWalking", false);
-            audio.Stop();
-            isWalking = false;
-        }
-
-        if (controlls.rightStick.x > .5f || Input.GetAxis("Twist") < -.5f || Input.GetAxis("Horizontal") > .5f)
-        {
-            character.transform.Rotate(0, controllerRotationSpeed, 0);
-        }
-        if (controlls.rightStick.x < -.5f || Input.GetAxis("Twist") > .5f || Input.GetAxis("Horizontal") < -.5f)
-        {
-            character.transform.Rotate(0, -controllerRotationSpeed, 0);
-        }
-
-
-        if (!grounded)
-        {
-            transform.position += new Vector3(0, -1f, 0) * Time.deltaTime;
-        }
-
-        if (Physics.CheckSphere(groundCheck.transform.position, .5f, mask))
-        {
-            grounded = true;
-        }
-        else
-        {
-            grounded = false;
-        }
 
 
     }

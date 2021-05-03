@@ -6,7 +6,10 @@ using UnityEngine.SceneManagement;
 public class PlayerStats : MonoBehaviour
 {
     public int MaxHP;
+    public GameObject explosion;
     private int currentHp;
+    public GameObject groundCheck;
+    public bool isDead;
 
 
     // Start is called before the first frame update
@@ -28,6 +31,7 @@ public class PlayerStats : MonoBehaviour
         {
             StartCoroutine(Die());
             currentHp = 0;
+            isDead = true;
         }
         else
         {
@@ -38,7 +42,11 @@ public class PlayerStats : MonoBehaviour
 
    IEnumerator Die()
     {
-
+        Instantiate(explosion, transform.position, Quaternion.identity);
+        GetComponent<CharacterController>().enabled = false;
+        transform.GetChild(0).GetComponent<Animator>().Play("Death");
+        GetComponent<AudioSource>().Stop();
+        groundCheck.SetActive(false);
         yield return new WaitForSeconds(2);
         SceneManager.LoadScene("SampleScene");
 

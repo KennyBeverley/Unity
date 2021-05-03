@@ -8,6 +8,7 @@ using TMPro;
 public class Shoot : MonoBehaviour
 {
     public TextMeshProUGUI pAmmoDisplay;
+    public GameObject shieldEnergyDisplay;
 
     public GameObject leftFirePoint;
     public GameObject rightFirePoint;
@@ -29,6 +30,11 @@ public class Shoot : MonoBehaviour
     public Material selectedScreenMat;
     public Material criticalScreenMat;
 
+    private float maxShieldEnergy = 20;
+    private float currentShieldEnergy;
+    private float nextShieldRecharge;
+    private float nextShieldDrain;
+
     private int maxPlasmaAmmo = 10;
     private int maxElectricEnergy;
 
@@ -44,6 +50,7 @@ public class Shoot : MonoBehaviour
     private bool firingMissiles;
 
     private bool isElectric;
+    private bool usingShields;
     private GameObject gm;
     private VRMapping controlls;
 
@@ -67,119 +74,137 @@ public class Shoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButton("Fire1"))
+        shieldEnergyDisplay.transform.localScale = new Vector3(1, currentShieldEnergy / maxShieldEnergy, 1);
+        if (!GetComponent<PlayerStats>().isDead)
         {
-            
-        }
-        
-        else
-        {
-            firingMissiles = false;
-        }
-
-        
-
-
-        rechargeAmmo();
-        ///////////////////////left primary///////////////////
-        if ((controlls.leftPrimary || controlls.rightPrimary) && (controlls.leftTrigger < .2f || controlls.rightTrigger < .2f) || Input.GetButton("Fire2"))
-        {
-            if (!primaryPressed)
+            if (Input.GetButton("Fire1"))
             {
-                primaryPressed = true;
+
+            }
+
+            else
+            {
+                firingMissiles = false;
+            }
+
+
+
+
+            rechargeAmmo();
+            ///////////////////////left primary///////////////////
+            if ((controlls.leftPrimary || controlls.rightPrimary) && (controlls.leftTrigger < .2f || controlls.rightTrigger < .2f) || Input.GetButton("Fire2"))
+            {
+                if (!primaryPressed)
+                {
+                    primaryPressed = true;
+                    if (isElectric)
+                    {
+                        isElectric = false;
+                        plasmaRange.gameObject.SetActive(true);
+                        electricRange.gameObject.SetActive(false);
+                        //setPlasma();
+                    }
+                    else
+                    {
+                        isElectric = true;
+                        plasmaRange.gameObject.SetActive(false);
+                        electricRange.gameObject.SetActive(true);
+                        //setElectric();
+
+
+                    }
+                }
+
+            }
+            else
+            {
+                primaryPressed = false;
+            }
+            /////////////////////////////////////////////////////
+
+            /////////////////////////right primary////////////////////
+            if ((controlls.leftSecondary || controlls.rightSecondary || Input.GetButton("Fire3") || Input.GetButton("Jump")) && currentShieldEnergy > 0)
+            {
+                shield.SetActive(true);
+                usingShields = true;
+
+                //setShield();
+                if(Time.time > nextShieldDrain)
+                {
+                    currentShieldEnergy--;
+                    nextShieldDrain = Time.time + 1;
+                }
+
+            }
+            else
+            {
+                usingShields = false;
+                shield.SetActive(false);
                 if (isElectric)
                 {
-                    isElectric = false;
-                    plasmaRange.gameObject.SetActive(true);
-                    electricRange.gameObject.SetActive(false);
-                    //setPlasma();
+                    setElectric();
                 }
                 else
                 {
-                    isElectric = true;
-                    plasmaRange.gameObject.SetActive(false);
-                    electricRange.gameObject.SetActive(true);
-                    //setElectric();
-
-
+                    setPlasma();
                 }
             }
+            /////////////////////////////////////////////////////////////
 
-        }
-        else
-        {
-            primaryPressed = false;
-        }
-        /////////////////////////////////////////////////////
 
-        /////////////////////////right primary////////////////////
-        if ((controlls.leftSecondary || controlls.rightSecondary || Input.GetButton("Fire3") || Input.GetButton("Jump")))
-        {
-            shield.SetActive(true);
-
-            setShield();
-        }
-        else
-        {
-            shield.SetActive(false);
-            if (isElectric)
+            if ((controlls.leftTrigger > .2f || controlls.rightTrigger > .2f) && !(controlls.leftSecondary || controlls.rightSecondary) || Input.GetButton("Fire1"))
             {
-                setElectric();
-            }
-            else
-            {
-                setPlasma();
-            }
-        }
-        /////////////////////////////////////////////////////////////
-
-
-        if ((controlls.leftTrigger > .2f || controlls.rightTrigger > .2f) && !(controlls.leftSecondary || controlls.rightSecondary) || Input.GetButton("Fire1"))
-        {
-            if (isElectric)
-            {
-                electric.SetActive(true);
-                electric.transform.position = leftFirePoint.transform.position;
-                electric.transform.eulerAngles = leftFirePoint.transform.parent.eulerAngles;
-
-                electric2.SetActive(true);
-                electric2.transform.position = rightFirePoint.transform.position;
-                electric2.transform.eulerAngles = rightFirePoint.transform.parent.eulerAngles;
-
-
-            }
-            else
-            {
-                if (Time.time > nextShot && plasmaAmmo > 0)
+                if (isElectric)
                 {
+                    electric.SetActive(true);
+                    electric.transform.position = leftFirePoint.transform.position;
+                    electric.transform.eulerAngles = leftFirePoint.transform.parent.eulerAngles;
 
+                    electric2.SetActive(true);
+                    electric2.transform.position = rightFirePoint.transform.position;
+                    electric2.transform.eulerAngles = rightFirePoint.transform.parent.eulerAngles;
 
-                    Vector3 point = GetComponent<HeadTracking>().point;
-                    var clone = Instantiate(ammo, leftFirePoint.transform.position, Quaternion.identity);
-                    clone.GetComponent<Bullet>().direction = (point - leftFirePoint.transform.position).normalized;
-                    nextShot = Time.time + 1;
-
-                    var clone2 = Instantiate(ammo, rightFirePoint.transform.position, Quaternion.identity);
-                    clone2.GetComponent<Bullet>().direction = (point - rightFirePoint.transform.position).normalized;
-                    nextShot = Time.time + .3f;
-
-                    Destroy(clone, 5);
-                    Destroy(clone2, 5);
-                    plasmaAmmo--;
 
                 }
+                else
+                {
+                    if (Time.time > nextShot && plasmaAmmo > 0)
+                    {
+
+
+                        Vector3 point = GetComponent<HeadTracking>().point;
+                        var clone = Instantiate(ammo, leftFirePoint.transform.position, Quaternion.identity);
+                        clone.GetComponent<Bullet>().direction = (point - leftFirePoint.transform.position).normalized;
+                        nextShot = Time.time + 1;
+
+                        var clone2 = Instantiate(ammo, rightFirePoint.transform.position, Quaternion.identity);
+                        clone2.GetComponent<Bullet>().direction = (point - rightFirePoint.transform.position).normalized;
+                        nextShot = Time.time + .3f;
+
+                        Destroy(clone, 5);
+                        Destroy(clone2, 5);
+                        plasmaAmmo--;
+
+                    }
+                }
+
+
+
+
+
             }
-
-
-
-
-
+            else
+            {
+                electric.SetActive(false);
+                electric2.SetActive(false);
+            }
         }
         else
         {
             electric.SetActive(false);
             electric2.SetActive(false);
         }
+        
 
     }
 
@@ -252,12 +277,14 @@ public class Shoot : MonoBehaviour
                 {
                     plasmaAmmo++;
                 }
-                nextPlasmaRecharge = Time.time + 3;
+                nextPlasmaRecharge = Time.time + 2;
             }
         }
-        else
+        
+        if(Time.time > nextShieldRecharge && currentShieldEnergy < maxShieldEnergy && !usingShields)
         {
-
+            currentShieldEnergy++;
+            nextShieldRecharge = Time.time + 2;
         }
 
         pAmmoDisplay.text = plasmaAmmo + "/ 10";
